@@ -32,8 +32,5 @@ case "$first_answer" in
 			echo "You're wrong! You have a $OS"
 		fi
 esac
-#OS_VER=$(lsb_release -sd)
-
-#echo $OS_VER
 
 
