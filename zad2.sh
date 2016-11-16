@@ -10,8 +10,12 @@ echo "" #for next line
 #MAIN HANDLE
 
 if [ "$1" == "--all" ]; then
-    SUBNET_IP=$(hostname -I)
-    
+    IP=$(hostname -I)
+    oct1=$(echo ${IP} | tr "." " " | awk '{ print $1 }')
+    oct2=$(echo ${IP} | tr "." " " | awk '{ print $2 }')
+    oct3=$(echo ${IP} | tr "." " " | awk '{ print $3 }')
+    SUBNET_IP=$(echo "$oct1.$oct2.$oct3.*")
+    nmap -sP $SUBNET_IP
 elif [[ $1 =~ "--target="[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} ]]; then
     IP=$(echo "$1" | cut -c 10-)
     nmap -Pn "*" $IP;
