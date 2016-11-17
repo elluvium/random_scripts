@@ -1,5 +1,6 @@
 #
-#Display detailed information about Apache logs
+#Login as users to remote machine and display some information about users
+#login history
 #
 
 #!/bin/bash
@@ -7,13 +8,21 @@ read -n 1 -p "Are you sure to run this script? (y/[a]): " AREYOUSURE;
 [ "$AREYOUSURE" = "y" ] || exit;
 echo "" #for next line
 #____________________________________________________________________
+echo "Login as \"elu..."
+ssh elu@192.168.43.37 'exit'
+echo "Login  sucessfull."
 
-PATH_TO_LOG=$1;
+echo "Login as \"amnesiac..."
 
-if [ -f $PATH_TO_LOG ]; then
-    echo 
+echo " HERE IS LAST LOGIN INFORMATION ABOUT USERS: "
+echo ""
+ssh amnesiac@192.168.43.37 last | awk -F" " '{ print $1" "$4" "$5" "$6" "$7" "$8" "$9" "$10" "$11 }' | awk '!/^reboot/'
+echo "Sucessfully finished!"
+
+exit 0
 
 
-else
-    echo "File does not exist"; exit
+
+
+
 
