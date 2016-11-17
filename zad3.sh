@@ -25,7 +25,11 @@ function Start_Backup() {
   echo "________________________________________________________" >> $LOG_FILE
 }
 
-Start_Backup
+inotifywait -m -r -e create,delete --format '%w%f has been %eD' "${PATH_TO_DIRECTORY}" | while read NEWFILE
+do
+   echo "$DATE | File ${NEWFILE} " >> $LOG_FILE
+   Start_Backup
+done
 
 
 
