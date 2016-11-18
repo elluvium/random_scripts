@@ -29,6 +29,11 @@ echo "$result"
 fi
 }
 
+function TimeWithMostQueries() {
+result=$(awk -F" " ' { print $4 }' "$1" | sort | uniq -c | sort -nr | head -n1)
+echo "$result"
+}
+
 function LetsFindSomeBotsss() {
 result=$(awk -F" " '/bot/ || /Bot/ { print $14 }' "$1" | sort | uniq -c)
 echo "$result"
@@ -50,11 +55,16 @@ echo "The most requested page is $page with numbers $number2"
 echo "________________________________________________"
 
 string3=$(CountRequestsNumber3 $1) #third task
+echo "Number of requests of each IP:"
 echo "$string3"
 echo "________________________________________________"
 
 string4=$(RequestToNonExistPages4 $1) #4 task
 echo "$string4"
+echo "________________________________________________"
+
+string5=$(TimeWithMostQueries $1) #5 task
+echo "$string5"
 echo "________________________________________________"
 
 string6=$(LetsFindSomeBotsss $1) #6 task
