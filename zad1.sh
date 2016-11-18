@@ -29,6 +29,11 @@ echo "$result"
 fi
 }
 
+function LetsFindSomeBotsss() {
+result=$(awk -F" " '/bot/ || /Bot/ { print $14 }' "$1" | sort | uniq -c)
+echo "$result"
+}
+
 
 ###########MAIN_HANDLE##############
 echo "________________________________________________"
@@ -50,4 +55,8 @@ echo "________________________________________________"
 
 string4=$(RequestToNonExistPages4 $1) #4 task
 echo "$string4"
+echo "________________________________________________"
+
+string6=$(LetsFindSomeBotsss $1) #6 task
+echo "$string6"
 echo "________________________________________________"
